@@ -1,0 +1,26 @@
+# Code Review Service 配置模板
+# 复制为 config.yaml 后按环境修改；敏感项一律放 .env（见 docs/config.md）
+
+provider: deepseek-official
+model: deepseek-v4-flash
+
+harness:
+  profile: sdk
+  # dshBin: 指向 deepseek-harness 源码模式入口，见 docs/integration-deepseek-harness.md §5
+  initializeTimeoutMs: 10000
+
+repoWhitelist:
+  - D:/work/project
+
+baseBranch: main
+globalSpecPath: ./specs/global-review-spec.md
+
+reviewTimeoutMin: 15
+
+reportsDirName: .reviews
+prevReportMaxBytes: 5242880
+requirementsMaxChars: 2000
+
+port: 3120
+concurrency: 1
+reportRetentionDays: 90

@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm install)",
+      "Bash(pnpm run build)",
+      "Bash(pnpm run test)",
+      "Bash(pnpm run test:*)",
+      "Bash(pnpm run lint*)",
+      "Bash(pnpm run typecheck*)",
+      "Bash(pnpm run dev)",
+      "Bash(pnpm vitest *)",
+      "Bash(git status)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git init)",
+      "Bash(node --version)",
+      "Bash(pnpm --version)"
+    ],
+    "deny": [
+      "Edit(../deepseek-harness/**)",
+      "Write(../deepseek-harness/**)",
+      "NotebookEdit(../deepseek-harness/**)",
+      "Bash(git -C ../deepseek-harness *)",
+      "Bash(cd ../deepseek-harness *)"
+    ]
+  }
+}

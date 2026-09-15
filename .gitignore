@@ -1,0 +1,21 @@
+# dependencies
+node_modules/
+
+# build outputs
+dist/
+lib/
+*.tsbuildinfo
+
+# secrets — never commit
+.env
+.env.*
+
+# reports and runtime artifacts
+.reviews/
+reports/
+smoke-output/
+
+# misc
+.DS_Store
+Thumbs.db
+*.log
