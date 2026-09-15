@@ -6,7 +6,7 @@
 
 - [x] **T0.1** 初始化仓库：package.json（ESM、Node ^22.19、pnpm）、tsconfig（strict）、vitest、oxlint、目录骨架（architecture.md §2）。验收：`pnpm run build && test && lint` 空转全绿。 ✔ 做了：工具链+健康检查骨架（src/app.ts+index.ts+tests/app.spec.ts），含 /healthz 端到端验证；pnpm v11 构建放行走 pnpm-workspace.yaml 的 allowBuilds。偏差：空目录不预建（git 不跟踪），各目录随对应任务落地；新增 tsconfig.tests.json 让 tests 纳入 typecheck。
 - [x] **T0.2** `config.ts`：config.yaml + .env 加载、zod 校验、fail loud（config.md 全部规则，含白名单前缀归一化）。验收：单测覆盖缺失/非法/越界用例。 ✔ 做了：18 个单测全绿（聚合报错/越界/相对路径拒绝/规范文件存在性/环境变量优先级/dotenv 解析/白名单段级前缀匹配）；真实启动路径验证 exit=1 + 缺失项提示。决策：config.yaml 相对路径（globalSpecPath）以 config.yaml 所在目录为基准解析而非 cwd；含默认值的 config.yaml 入库供本地直接跑。
-- [ ] **T0.3** 领域错误类型 + HTTP 错误映射表（api-contract.md 的 code 列表）。验收：单测。
+- [x] **T0.3** 领域错误类型 + HTTP 错误映射表（api-contract.md 的 code 列表）。验收：单测。 ✔ 做了：`src/routes/errors.ts` —— ApiError（9 个请求级 code→HTTP status 常量表）、TaskFailureCode（4 个任务级 code + 类型守卫）、toEnvelope/handleApiError 统一渲染 `{error:{code,message,details}}`，未知错误降级 500 INTERNAL；app.ts 挂 onError。26 测试全绿。
 
 ## M1 Harness 适配层（技术风险集中区）
 
