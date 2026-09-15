@@ -1,0 +1,23 @@
+# 本仓库的实际运行配置（非敏感，可进 git）；敏感项在 .env，见 docs/config.md
+provider: deepseek-official
+model: deepseek-v4-flash
+
+harness:
+  profile: sdk
+  initializeTimeoutMs: 10000
+
+repoWhitelist:
+  - D:/work/project
+
+baseBranch: main
+globalSpecPath: ./specs/global-review-spec.md
+
+reviewTimeoutMin: 15
+
+reportsDirName: .reviews
+prevReportMaxBytes: 5242880
+requirementsMaxChars: 2000
+
+port: 3120
+concurrency: 1
+reportRetentionDays: 90

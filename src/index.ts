@@ -1,15 +1,25 @@
 import { serve } from '@hono/node-server'
-
-/** Application port; the config module (T0.2) will own this value later. */
-const DEFAULT_PORT = 3120
+import { ConfigError, loadConfig } from './config.js'
 
 /**
- * Boot the HTTP server. Kept separate from module top-level so tests import
- * the app without opening a port; index.ts owns the process lifecycle only.
+ * Boot the service: fail loud on configuration problems, then serve.
+ * Kept as a function (not module top-level work) so tests import modules
+ * without process side effects.
  */
 export function main(): void {
-  const port = Number(process.env.PORT ?? DEFAULT_PORT)
-  // Placeholder bootstrap; routes arrive in T4.3, config in T0.2.
+  let port: number
+  try {
+    const { config } = loadConfig()
+    port = config.port
+  } catch (error) {
+    if (error instanceof ConfigError) {
+      console.error(`configuration invalid:\n${error.problems.map((p) => `  - ${p}`).join('\n')}`)
+      process.exitCode = 1
+      return
+    }
+    throw error
+  }
+  // Route modules mount in createApp as they land (reviews routes in T4.3).
   import('./app.js').then(({ createApp }) => {
     serve({ fetch: createApp().fetch, port }, (info) => {
       console.log(`code-review-service listening on http://127.0.0.1:${info.port}`)
