@@ -4,7 +4,7 @@
 
 ## M0 脚手架
 
-- [ ] **T0.1** 初始化仓库：package.json（ESM、Node ^22.19、pnpm）、tsconfig（strict）、vitest、oxlint、目录骨架（architecture.md §2）。验收：`pnpm run build && test && lint` 空转全绿。
+- [x] **T0.1** 初始化仓库：package.json（ESM、Node ^22.19、pnpm）、tsconfig（strict）、vitest、oxlint、目录骨架（architecture.md §2）。验收：`pnpm run build && test && lint` 空转全绿。 ✔ 做了：工具链+健康检查骨架（src/app.ts+index.ts+tests/app.spec.ts），含 /healthz 端到端验证；pnpm v11 构建放行走 pnpm-workspace.yaml 的 allowBuilds。偏差：空目录不预建（git 不跟踪），各目录随对应任务落地；新增 tsconfig.tests.json 让 tests 纳入 typecheck。
 - [ ] **T0.2** `config.ts`：config.yaml + .env 加载、zod 校验、fail loud（config.md 全部规则，含白名单前缀归一化）。验收：单测覆盖缺失/非法/越界用例。
 - [ ] **T0.3** 领域错误类型 + HTTP 错误映射表（api-contract.md 的 code 列表）。验收：单测。
 
